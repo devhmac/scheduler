@@ -11,7 +11,7 @@ export default function InterviewerListItem(props) {
       className="interviewers__item-image"
       src={props.avatar}
       selected={props.selected}
-      onClick={() => { props.setInterviewer(props.id) }}
+      onClick={props.setInterviewer}
       alt="Sylvia Palmer"
     />
     {props.selected ? props.name : ''}
