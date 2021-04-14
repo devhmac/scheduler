@@ -61,15 +61,12 @@ export default function Application(props) {
   const [days, setDays] = useState([])
 
 
-
-
   useEffect(() => {
     axios.get('/api/days')
       .then(response => setDays([...response.data]))
   }, [])
 
   const appointmentList = appointments.map(appointment => {
-    console.log(appointments)
     return (
       <Appointment
         key={appointment.id}
