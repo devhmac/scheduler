@@ -80,8 +80,9 @@ export default function Application(props) {
     return (
       <Appointment
         key={appointment.id}
-        time={appointment.time}
-        interview={appointment.interview}
+
+        //this is spread is awesome
+        {...appointment}
       />
     );
   })
