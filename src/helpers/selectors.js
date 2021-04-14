@@ -1,14 +1,18 @@
+import Appointment from "components/Appointment"
 
-export function getAppointmentsForDay(state, day) {
+export function getAppointmentsForDay(state, daySelector) {
 
-  const dayMatchArray = []
+  const dayMatchArray = [];
 
-  for (let day of state) {
-    if (day.name === day) {
-      console.log(day.appointment)
+  for (let day of state.days) {
+    if (day.name === daySelector) {
+      for (let appointment in state.appointments) {
+        if (day.appointments.includes(Number(appointment))) {
+          dayMatchArray.push(state.appointments[appointment]);
+        }
+      }
     }
-  }
-
+  };
   return dayMatchArray;
 };
 
