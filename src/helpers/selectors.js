@@ -1,0 +1,1 @@
+const getAppointmentsForDay = (state, day) => { };
