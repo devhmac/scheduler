@@ -1,6 +1,6 @@
 import Appointment from "components/Appointment"
 
-export function getAppointmentsForDay(state, daySelector) {
+export default function getAppointmentsForDay(state, daySelector) {
 
   const dayMatchArray = [];
 
