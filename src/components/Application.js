@@ -5,7 +5,7 @@ import Button from "components/Button";
 import DayListItem from 'components/DayListItem'
 import DayList from 'components/DayList'
 import Appointment from 'components/Appointment'
-import getAppointmentsForDay from 'helpers/selectors'
+import { getAppointmentsForDay, getInterview } from 'helpers/selectors'
 import axios from 'axios'
 
 
@@ -14,7 +14,8 @@ export default function Application(props) {
   const [state, setState] = useState({
     day: 'Monday',
     days: [],
-    appointments: {}
+    appointments: {},
+    interviewers: {}
   });
 
 
@@ -30,20 +31,24 @@ export default function Application(props) {
     ])
       .then(all => {
         const [daysList, appointmentsList, interviewersList] = all
-        console.log(daysList.data, appointmentsList.data, interviewersList.data)
-        setState(prev => ({ ...prev, days: daysList.data, appointments: appointmentsList.data }))
+        console.log(interviewersList.data)
+        setState(prev => ({ ...prev, days: daysList.data, appointments: appointmentsList.data, interviewers: interviewersList.data }))
       })
-
   }, []);
+
+
   const dailyAppointments = getAppointmentsForDay(state, state.day)
 
   const appointmentList = dailyAppointments.map(appointment => {
+    const interview = getInterview(state, appointment.interview);
+
     return (
       <Appointment
         key={appointment.id}
+        id={appointment.id}
+        time={appointment.time}
+        interview={interview}
 
-        //this is spread is awesome
-        {...appointment}
       />
     );
   })
