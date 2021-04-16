@@ -22,3 +22,12 @@ export function getInterview(state, interview) {
 
   return interviewObj
 }
+
+export function getInterviewersForDay(state, daySelector) {
+  for (let day of state.days) {
+    if (day.name === daySelector) {
+      return day.interviewers.map(id => state.interviewers[id]);
+    }
+  };
+  return [];
+};

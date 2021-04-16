@@ -31,7 +31,7 @@ export default function Application(props) {
     ])
       .then(all => {
         const [daysList, appointmentsList, interviewersList] = all
-        console.log(interviewersList.data)
+        console.log(daysList.data)
         setState(prev => ({ ...prev, days: daysList.data, appointments: appointmentsList.data, interviewers: interviewersList.data }))
       })
   }, []);
