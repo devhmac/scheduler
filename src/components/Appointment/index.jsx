@@ -63,6 +63,14 @@ const {mode, transition, back} = useVisualMode(
   props.interview ? SHOW : EMPTY
   );
 
+  function save(name, interviewer) {
+    const interview = {
+      student: name,
+      interviewer
+    };
+    props.bookInterview(props.id,interview)
+  };
+
   return(
   <article className='appointment'>
     <Header 
@@ -76,9 +84,8 @@ const {mode, transition, back} = useVisualMode(
     />
     )}
     {mode === CREATE && (
-     <Form interviewers={[]} onSave={props.onSave} onCancel={back} />
+     <Form interviewers={[]} onSave={save} onCancel={back} />
     )}
-
     </article>
   );
 };
