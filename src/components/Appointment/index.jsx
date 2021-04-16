@@ -80,10 +80,6 @@ const {mode, transition, back} = useVisualMode(
     .then(()=> transition(SHOW))
  };
 
- function editInterview(){
-   transition(EDIT)
-   console.log('should be the same as', props.interview.interviewer.id, props.interview.student)
- }
  
  function deleteInterview(id){
    transition(DELETING)
@@ -97,7 +93,6 @@ const {mode, transition, back} = useVisualMode(
   };
 
   
-
   return(
   <article className='appointment'>
     <Header 

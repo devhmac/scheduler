@@ -48,7 +48,7 @@ export default function Application(props) {
     }
 
     return axios.put(`/api/appointments/${id}`, appointment)
-      .then(response => setState({ ...state, appointments }))
+      .then(() => setState({ ...state, appointments }))
   }
 
   function cancelInterview(id) {
@@ -62,7 +62,7 @@ export default function Application(props) {
     }
     setState({ ...state, appointments })
     return axios.delete(`/api/appointments/${id}`, appointment)
-      .then(response => setState({ ...state, appointments }))
+      .then(() => setState({ ...state, appointments }))
 
   };
 
