@@ -7,6 +7,7 @@ import Form from './Form'
 import useVisualMode from '../../hooks/useVisualMode'
 import Status from './Status'
 import Confirm from './Confirm'
+import { fireEvent } from '@testing-library/react/dist'
 
 
 // const appointments = [
@@ -62,6 +63,7 @@ const CREATE = "CREATE"
 const SAVING = "SAVING"
 const DELETING = "DELETING"
 const CONFIRM = "CONFIRM"
+const EDIT = "EDIT"
 
 export default function Appointment(props) {
 const {mode, transition, back} = useVisualMode(
@@ -78,6 +80,10 @@ const {mode, transition, back} = useVisualMode(
     .then(()=> transition(SHOW))
  };
 
+ function editInterview(){
+   transition(EDIT)
+   console.log('should be the same as', props.interview.interviewer.id, props.interview.student)
+ }
  
  function deleteInterview(id){
    transition(DELETING)
@@ -88,8 +94,9 @@ const {mode, transition, back} = useVisualMode(
   
   function confirmDelete(){
     transition(CONFIRM)
-    //deleteInterview(props.id)
   };
+
+  
 
   return(
   <article className='appointment'>
@@ -102,6 +109,7 @@ const {mode, transition, back} = useVisualMode(
       student={props.interview.student}
       interviewer={props.interview.interviewer}
       onDelete={confirmDelete}
+      onEdit={()=>{transition(EDIT)}}
     />
     )}
     {mode === CREATE && (
@@ -110,6 +118,7 @@ const {mode, transition, back} = useVisualMode(
     {mode === SAVING && (<Status message={"Saving"}/>)}
     {mode === DELETING && (<Status message={'Deleting'} />)}
     {mode === CONFIRM && (<Confirm message={"Are you sure you would like to delete"} onCancel={back} onConfirm={()=> deleteInterview(props.id)} />)}
+    {mode === EDIT && (<Form name={props.interview.student} interviewer={props.interview.interviewer.id} interviewers={props.interviewers} onSave={save} onCancel={back} />)}
 
     </article>
   );
