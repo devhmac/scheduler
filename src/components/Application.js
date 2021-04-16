@@ -5,7 +5,7 @@ import Button from "components/Button";
 import DayListItem from 'components/DayListItem'
 import DayList from 'components/DayList'
 import Appointment from 'components/Appointment'
-import { getAppointmentsForDay, getInterview } from 'helpers/selectors'
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from 'helpers/selectors'
 import axios from 'axios'
 
 
@@ -41,6 +41,8 @@ export default function Application(props) {
   }
 
   const dailyAppointments = getAppointmentsForDay(state, state.day)
+  const dayInterviewers = getInterviewersForDay(state, state.day)
+  console.log('day interviewers', dayInterviewers)
 
   const appointmentList = dailyAppointments.map(appointment => {
     const interview = getInterview(state, appointment.interview);
@@ -52,6 +54,7 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         bookInterview={bookInterview}
+        interviewers={dayInterviewers}
 
       />
     );

@@ -84,7 +84,7 @@ const {mode, transition, back} = useVisualMode(
     />
     )}
     {mode === CREATE && (
-     <Form interviewers={[]} onSave={save} onCancel={back} />
+     <Form interviewers={props.interviewers} onSave={save} onCancel={back} />
     )}
     </article>
   );
