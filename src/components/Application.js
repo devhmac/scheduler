@@ -47,10 +47,11 @@ export default function Application(props) {
       [id]: appointment
     }
 
-    return axios.put(`/api/appointments/${id}`, appointment)
+    return axios.put(`/api/appointments/${id}`, { interview })
       .then(() => setState({ ...state, appointments }))
   }
 
+  //sends canceled interview data to server api
   function cancelInterview(id) {
     const appointment = {
       ...state.appointments[id],
@@ -60,8 +61,8 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     }
-    setState({ ...state, appointments })
-    return axios.delete(`/api/appointments/${id}`, appointment)
+
+    return axios.delete(`/api/appointments/${id}`, { interview: null })
       .then(() => setState({ ...state, appointments }))
 
   };
