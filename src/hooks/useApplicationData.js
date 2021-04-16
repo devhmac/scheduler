@@ -28,6 +28,15 @@ export default function useApplicationData(props) {
       })
   }, []);
 
+  const findDayId = (id) => {
+    for (let day of state.days) {
+      if (day.appointments.includes(id)) {
+        return day.id
+      }
+    }
+  }
+
+
   //sends adds booked data to state and sends to database API
   function bookInterview(id, interview) {
     const appointment = {
@@ -37,6 +46,10 @@ export default function useApplicationData(props) {
     const appointments = {
       ...state.appointments,
       [id]: appointment
+    }
+    let dayId = findDayId(id)
+    const day = {
+
     }
 
     return axios.put(`/api/appointments/${id}`, { interview })
@@ -58,6 +71,8 @@ export default function useApplicationData(props) {
       .then(() => setState({ ...state, appointments }))
 
   };
+
+
 
   return {
     state,
