@@ -31,18 +31,44 @@ export default function Application(props) {
     ])
       .then(all => {
         const [daysList, appointmentsList, interviewersList] = all
-        console.log(daysList.data)
+
         setState(prev => ({ ...prev, days: daysList.data, appointments: appointmentsList.data, interviewers: interviewersList.data }))
       })
   }, []);
 
+  //sends adds booked data to state and sends to database API
   function bookInterview(id, interview) {
-    console.log(id, interview);
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    }
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    }
+
+    return axios.put(`/api/appointments/${id}`, appointment)
+      .then(response => setState({ ...state, appointments }))
   }
+
+  function cancelInterview(id) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    }
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    }
+    setState({ ...state, appointments })
+    return axios.delete(`/api/appointments/${id}`, appointment)
+      .then(response => setState({ ...state, appointments }))
+
+  };
 
   const dailyAppointments = getAppointmentsForDay(state, state.day)
   const dayInterviewers = getInterviewersForDay(state, state.day)
-  console.log('day interviewers', dayInterviewers)
+
 
   const appointmentList = dailyAppointments.map(appointment => {
     const interview = getInterview(state, appointment.interview);
@@ -54,13 +80,12 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
         interviewers={dayInterviewers}
 
       />
     );
   })
-
-
 
   return (
     <main className="layout">
