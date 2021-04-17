@@ -28,7 +28,7 @@ export default function useApplicationData(props) {
       })
   }, []);
 
-  const newSpotCount = (appId, add) => {
+  const newSpotDay = (appId, add) => {
     for (let day of state.days) {
       if (day.appointments.includes(appId)) {
         let newSpots = day.spots;
@@ -38,50 +38,8 @@ export default function useApplicationData(props) {
     }
   }
   const newDaysArr = (dayObj, daysArr) => {
-
-    return daysArr.map((day) => day.name === dayObj.name ? dayObj : day);
-    // console.log('the map!!!!!', daysArr.map((day) => day.name === dayObj.name ? dayObj : day))
-
+    return daysArr.map(day => day.name === dayObj.name ? dayObj : day);
   }
-
-  const testDay = newSpotCount(1)
-  console.log('my days', testDay)
-  console.log('state days', state.days)
-
-  newDaysArr(testDay, state.days)
-
-
-
-  // const newSpotCount2 = (id, add) => {
-  //   for (let i = 0; i < state.days.length - 1; i++) {
-  //     if (state.days[i].appointments.includes(id)) {
-  //       let newSpots = state.days[i].spots
-  //       add ? newSpots += 1 : newSpots -= 1
-  //       return [state.days[i] = { ...state.days[i], spots: newSpots }]
-  //     }
-  //   }
-  // }
-
-  // const getSpotsForDay = (day, appointments) => {
-  //   const spots = 0
-
-  //   return spots
-  // }
-
-  // const updateSpots = (dayName, days, appointments) => {
-
-  //   //find day obj
-  //   //calc spots
-  //   //create new day obj
-
-  // }
-
-
-
-
-
-  //console.log(state.days[0])
-
 
   //sends adds booked data to state and sends to database API
   function bookInterview(id, interview) {
@@ -94,9 +52,10 @@ export default function useApplicationData(props) {
       [id]: appointment
     }
 
+    const days = newDaysArr(newSpotDay(id, null), state.days)
 
     return axios.put(`/api/appointments/${id}`, { interview })
-      .then(() => setState({ ...state, appointments, }))
+      .then(() => setState(prev => { return { ...prev, appointments, days } }))
   }
 
   //sends canceled interview data to server api
@@ -110,8 +69,10 @@ export default function useApplicationData(props) {
       [id]: appointment
     }
 
+    const days = newDaysArr(newSpotDay(id, true), state.days)
+
     return axios.delete(`/api/appointments/${id}`, { interview: null })
-      .then(() => setState({ ...state, appointments }))
+      .then(() => setState(prev => { return { ...prev, appointments, days } }))
 
   };
 
