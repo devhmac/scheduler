@@ -28,15 +28,17 @@ export default function useApplicationData(props) {
       })
   }, []);
 
-  const newSpotDay = (appId, add) => {
-    for (let day of state.days) {
-      if (day.appointments.includes(appId)) {
+
+  const newSpotDay = (dayName, daysArr, add) => {
+    for (let day of daysArr) {
+      if (day.name === dayName) {
         let newSpots = day.spots;
         add ? newSpots += 1 : newSpots -= 1
         return { ...day, spots: newSpots }
       }
     }
   }
+
   const newDaysArr = (dayObj, daysArr) => {
     return daysArr.map(day => day.name === dayObj.name ? dayObj : day);
   }
@@ -51,8 +53,7 @@ export default function useApplicationData(props) {
       ...state.appointments,
       [id]: appointment
     }
-
-    const days = newDaysArr(newSpotDay(id, null), state.days)
+    const days = newDaysArr(newSpotDay(state.day, state.days, null), state.days)
 
     return axios.put(`/api/appointments/${id}`, { interview })
       .then(() => setState(prev => { return { ...prev, appointments, days } }))
@@ -69,7 +70,7 @@ export default function useApplicationData(props) {
       [id]: appointment
     }
 
-    const days = newDaysArr(newSpotDay(id, true), state.days)
+    const days = newDaysArr(newSpotDay(state.day, state.days, true), state.days)
 
     return axios.delete(`/api/appointments/${id}`, { interview: null })
       .then(() => setState(prev => { return { ...prev, appointments, days } }))
