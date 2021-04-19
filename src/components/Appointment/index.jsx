@@ -10,54 +10,6 @@ import Confirm from './Confirm'
 import Error from './Error'
 
 
-
-// const appointments = [
-//   {
-//     id: 1,
-//     time: "12pm",
-//   },
-//   {
-//     id: 2,
-//     time: "1pm",
-//     interview: {
-//       student: "Lydia Miller-Jones",
-//       interviewer: {
-//         id: 1,
-//         name: "Sylvia Palmer",
-//         avatar: "https://i.imgur.com/LpaY82x.png",
-//       }
-//     }
-//   },
-//   {
-//     id: 2,
-//     time: "1pm",
-//     interview: {
-//       student: "Caitlyn MacG",
-//       interviewer: {
-//         id: 2,
-//         name: "Devin MacGillivray",
-//         avatar: "https://i.imgur.com/twYrpay.jpg",
-//       }
-//     }
-//   },
-//   {
-//     id: 3,
-//     time: "12pm",
-//   },
-//   {
-//     id: 4,
-//     time: "1pm",
-//     interview: {
-//       student: "Lydia Miller-Jones",
-//       interviewer: {
-//         id: 3,
-//         name: "Ben Mussche",
-//         avatar: "https://i.imgur.com/FK8V841.jpg",
-//       }
-//     }
-//   }
-// ];
-
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE"
@@ -121,7 +73,15 @@ const {mode, transition, back} = useVisualMode(
 
     {mode === CONFIRM && (<Confirm message={"Are you sure you would like to delete"} onCancel={back} onConfirm={()=> deleteInterview(props.id)} />)}
 
-    {mode === EDIT && (<Form name={props.interview.student} interviewer={props.interview.interviewer.id} interviewers={props.interviewers} onSave={save} onCancel={back} />)}
+    {mode === EDIT && (
+    <Form 
+    name={props.interview.student} 
+    interviewer={props.interview.interviewer.id} 
+    interviewers={props.interviewers} 
+    onSave={save} 
+    onCancel={back} 
+    />
+    )}
 
     {mode === ERROR_SAVE && (<Error message={'We were unable to schedule your appointment'} onClose={back} />)}
     {mode === ERROR_DELETE && (<Error message={'We were unable to delete your appointment'} onClose={back} />)}
