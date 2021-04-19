@@ -1,16 +1,49 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer } from "react";
 import axios from "axios";
 
 export default function useApplicationData(props) {
-  const [state, setState] = useState({
-    day: "Monday",
-    days: [],
-    appointments: {},
-    interviewers: {},
-  });
+  // const [state, setState] = useState({
+  //   day: "Monday",
+  //   days: [],
+  //   appointments: {},
+  //   interviewers: {},
+  // });
 
-  const setDay = (day) => setState({ ...state, day });
-  const setDays = (days) => setState((prev) => ({ ...prev, days }));
+  const [state, dispatch] = useReducer(reducer, 0);
+
+  const SET_DAY = "SET_DAY";
+  const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
+  const SET_INTERVIEW = "SET_INTERVIEW";
+  const SET_SPOTS = "SET_SPOTS"
+
+  function reducer(state, action) {
+    switch (action.type) {
+      case SET_DAY:
+        return { ...state, day: action.value }
+
+      case SET_APPLICATION_DATA:
+        return { ...state, days: action.days, appointments: action.appointments, interviewers: action.interviewers }
+
+      case SET_INTERVIEW: {
+        return { ...state, appointments: action.value }
+      }
+      case SET_SPOTS: {
+        return { ...state, days: action.value }
+      }
+
+      default:
+        throw new Error(
+          `Tried to reduce with unsupported action type: ${action.type}`
+        );
+    }
+  }
+
+
+
+  // const setDay = (day) => setState({ ...state, day });
+
+  const setDay = (day) => dispatch({ type: SET_DAY, value: day });
+  // const setDays = (days) => setState((prev) => ({ ...prev, days }));
 
   useEffect(() => {
     Promise.all([
@@ -20,12 +53,19 @@ export default function useApplicationData(props) {
     ]).then((all) => {
       const [daysList, appointmentsList, interviewersList] = all;
 
-      setState((prev) => ({
-        ...prev,
+      dispatch({
+        type: SET_APPLICATION_DATA,
         days: daysList.data,
         appointments: appointmentsList.data,
-        interviewers: interviewersList.data,
-      }));
+        interviewers: interviewersList.data
+      }
+      );
+      // setState((prev) => ({
+      //   ...prev,
+      //   days: daysList.data,
+      //   appointments: appointmentsList.data,
+      //   interviewers: interviewersList.data,
+      // }));
     });
   }, []);
 
@@ -48,6 +88,7 @@ export default function useApplicationData(props) {
 
   //sends adds booked data to state and sends to database API
   function bookInterview(id, interview) {
+
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
