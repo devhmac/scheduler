@@ -35,7 +35,9 @@ describe("Form", () => {
     /* 1. Create the mock onSave function */
     const onSave = jest.fn()
     /* 2. Render the Form with interviewers and the onSave mock function passed as an onSave prop, the name prop should be blank or undefined */
-    const { getByText } = render(<Form interviewers={interviewers} onSave={onSave} />)
+    const { getByText } = render(
+      <Form interviewers={interviewers} onSave={onSave} />
+    )
 
     /* 3. Click the save button */
     fireEvent.click(getByText("Save"));
@@ -51,7 +53,9 @@ describe("Form", () => {
     /* 1. Create the mock onSave function */
     const onSave = jest.fn()
     /* 2. Render the Form with interviewers, name and the onSave mock function passed as an onSave prop */
-    const { queryByText, getByText } = render(<Form interviewers={interviewers} name={"Lydia Miller-Jones"} onSave={onSave} />)
+    const { queryByText, getByText } = render(
+      <Form interviewers={interviewers} name={"Lydia Miller-Jones"} onSave={onSave} />
+    )
     /* 3. Click the save button */
     fireEvent.click(getByText("Save"));
     /* 3. validation is not shown */
