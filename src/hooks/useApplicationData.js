@@ -29,7 +29,7 @@ export default function useApplicationData(props) {
     });
   }, []);
 
-  const getSpotCount = (dayName, days, appointments) => {
+  const newSpotDayObj = (dayName, days, appointments) => {
     const dayToUpdate = days.find(day => day.name === dayName);
     let spotCount = 0;
     for (let app in appointments) {
@@ -57,7 +57,7 @@ export default function useApplicationData(props) {
       [id]: appointment,
     };
 
-    const days = newDaysArr(getSpotCount(state.day, state.days, appointments), state.days)
+    const days = newDaysArr(newSpotDayObj(state.day, state.days, appointments), state.days)
 
     return axios.put(`/api/appointments/${id}`, { interview })
       .then(() =>
@@ -78,7 +78,7 @@ export default function useApplicationData(props) {
       [id]: appointment,
     };
 
-    const days = newDaysArr(getSpotCount(state.day, state.days, appointments), state.days)
+    const days = newDaysArr(newSpotDayObj(state.day, state.days, appointments), state.days)
 
     return axios
       .delete(`/api/appointments/${id}`, { interview: null })
