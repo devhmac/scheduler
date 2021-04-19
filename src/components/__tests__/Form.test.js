@@ -15,8 +15,6 @@ describe("Form", () => {
     }
   ];
 
-
-
   //renders component
   it("renders without student name if not provided", () => {
 
