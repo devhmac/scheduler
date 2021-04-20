@@ -14,8 +14,8 @@ export default function useApplicationData(props) {
   const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
   const SET_INTERVIEW = "SET_INTERVIEW";
 
-  const newSpotDayObj = (dayName, days, appointments) => {
-    const dayToUpdate = days.find(day => day.name === dayName);
+  const newSpotDayObj = (id, days, appointments) => {
+    const dayToUpdate = days.find(day => day.appointments.includes(id));
 
     let spotCount = 0;
     for (let app in appointments) {
@@ -56,7 +56,7 @@ export default function useApplicationData(props) {
         };
 
         //builds new days state
-        const days = newDaysArr(newSpotDayObj(state.day, state.days, appointments), state.days)
+        const days = newDaysArr(newSpotDayObj(action.id, state.days, appointments), state.days)
 
         return { ...state, appointments, days }
       }
