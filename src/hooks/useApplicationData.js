@@ -14,6 +14,24 @@ export default function useApplicationData(props) {
   const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
   const SET_INTERVIEW = "SET_INTERVIEW";
 
+  const newSpotDayObj = (dayName, days, appointments) => {
+    const dayToUpdate = days.find(day => day.name === dayName);
+
+    let spotCount = 0;
+    for (let app in appointments) {
+      if (appointments[app].interview === null && dayToUpdate.appointments.includes(appointments[app].id)) {
+        spotCount++
+      }
+    }
+    return { ...dayToUpdate, spots: spotCount };
+  };
+
+  const newDaysArr = (dayObj, daysArr) => {
+    return daysArr.map((day) => (day.name === dayObj.name ? dayObj : day));
+  };
+
+  //--- useReducer state ------//
+
   const [state, dispatch] = useReducer(reducer, initial);
 
 
@@ -26,22 +44,6 @@ export default function useApplicationData(props) {
         return { ...state, days: action.days, appointments: action.appointments, interviewers: action.interviewers }
 
       case SET_INTERVIEW: {
-
-        const newSpotDayObj = (dayName, days, appointments) => {
-
-          const dayToUpdate = days.find(day => day.name === dayName);
-          let spotCount = 0;
-          for (let app in appointments) {
-            if (appointments[app].interview === null && dayToUpdate.appointments.includes(appointments[app].id)) {
-              spotCount++
-            }
-          }
-          return { ...dayToUpdate, spots: spotCount };
-        };
-
-        const newDaysArr = (dayObj, daysArr) => {
-          return daysArr.map((day) => (day.name === dayObj.name ? dayObj : day));
-        };
 
         //building new appointments state
         const appointment = {
@@ -78,8 +80,6 @@ export default function useApplicationData(props) {
           dispatch({ type: SET_INTERVIEW, id: message.id, interview: message.interview })
         }
       }
-
-      webSocket.send("ping")
     }
     return cleanup
   }, [])
@@ -117,8 +117,7 @@ export default function useApplicationData(props) {
   //sends canceled interview data to server api
   function cancelInterview(id) {
 
-    return axios
-      .delete(`/api/appointments/${id}`, { interview: null })
+    return axios.delete(`/api/appointments/${id}`, { interview: null })
       .then(() => dispatch({ type: SET_INTERVIEW, id: id, interview: null }));
   }
 
