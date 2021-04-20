@@ -21,6 +21,7 @@ describe("Form", () => {
 
   it('Loads data, books an interview and reduces the spots remaining for the first day by 1', async () => {
     const { container, debug } = render(<Application />);
+
     await waitForElement(() => getByText(container, "Archie Cohen"))
 
     const appointment = getAllByTestId(container, 'appointment')[0];
@@ -32,9 +33,7 @@ describe("Form", () => {
     });
 
     fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
-
     fireEvent.click(getByText(appointment, 'Save'));
-
 
     expect(getByText(appointment, 'Saving')).toBeInTheDocument();
 
