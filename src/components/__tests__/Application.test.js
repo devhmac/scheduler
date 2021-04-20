@@ -7,7 +7,7 @@ import axios from 'axios'
 
 afterEach(cleanup);
 
-describe("Form", () => {
+describe("Application", () => {
 
   it("Defaults to monday and changes the schedule when a new day is selected", async () => {
     const { getByText } = render(<Application />);
