@@ -62,7 +62,7 @@ const {mode, transition, back} = useVisualMode(
   
   
   return(
-  <article className='appointment'>
+  <article className='appointment' data-testid="appointment"> 
     <Header 
       time={props.time}
        />
