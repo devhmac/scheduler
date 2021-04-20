@@ -20,11 +20,10 @@ describe("Form", () => {
   });
 
   it('Loads data, books an interview and reduces the spots remaining for the first day by 1', async () => {
-    const { container } = render(<Application />);
+    const { container, debug } = render(<Application />);
     await waitForElement(() => getByText(container, "Archie Cohen"))
 
     const appointment = getAllByTestId(container, 'appointment')[0];
-    console.log(prettyDOM(appointment))
 
     fireEvent.click(getByAltText(appointment, 'Add'));
 
@@ -33,8 +32,17 @@ describe("Form", () => {
     });
 
     fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
+
     fireEvent.click(getByText(appointment, 'Save'));
 
+
+    expect(getByText(appointment, 'Saving')).toBeInTheDocument();
+
+    await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));
+
+    const day = getAllByTestId(container, 'day').find(day => getByText(day, "Monday"));
+
+    expect(getByText(day, 'no spots remaining')).toBeInTheDocument()
   });
 });
 
