@@ -41,11 +41,15 @@ export default function useApplicationData(props) {
   }
 
 
-
   // const setDay = (day) => setState({ ...state, day });
 
   const setDay = (day) => dispatch({ type: SET_DAY, value: day });
   // const setDays = (days) => setState((prev) => ({ ...prev, days }));
+
+  //websocket connection
+  useEffect(() => {
+    const webSocket = new WebSocket('ws://localhost:8001')
+  })
 
   useEffect(() => {
     Promise.all([
