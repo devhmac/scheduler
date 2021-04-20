@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import 'components/Appointment/styles.scss'
 import Header from './Header'
 import Empty from './Empty'
@@ -25,6 +25,8 @@ const {mode, transition, back} = useVisualMode(
   props.interview ? SHOW : EMPTY
   );
 
+  
+
   function save(name, interviewer) {
     transition(SAVING)
     const interview = {
@@ -48,7 +50,16 @@ const {mode, transition, back} = useVisualMode(
   function confirmDelete(){
     transition(CONFIRM)
   };
-
+  
+  useEffect(() => {
+    if (props.interview && mode === EMPTY) {
+     transition(SHOW);
+    }
+    if (props.interview === null && mode === SHOW) {
+     transition(EMPTY);
+    }
+   }, [props.interview, transition, mode]);
+  
   
   return(
   <article className='appointment'>
@@ -56,7 +67,7 @@ const {mode, transition, back} = useVisualMode(
       time={props.time}
        />
      {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
-      {mode === SHOW && (
+      {mode === SHOW && props.interview &&(
     <Show
       student={props.interview.student}
       interviewer={props.interview.interviewer}
