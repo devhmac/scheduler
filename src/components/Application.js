@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 import "components/Application.scss";
-import Button from "components/Button";
-import DayListItem from 'components/DayListItem'
 import DayList from 'components/DayList'
 import Appointment from 'components/Appointment'
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from 'helpers/selectors'
