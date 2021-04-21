@@ -1,9 +1,11 @@
 describe("Appointments", () => {
 
-  it('Should book a new interview', () => {
+  beforeEach(() => {
     cy.request("GET", "/api/debug/reset")
-
     cy.visit('/');
+  })
+
+  it('Should book a new interview', () => {
     cy.contains('Monday')
     cy.get('[alt="Add"]')
       .first()
@@ -17,7 +19,11 @@ describe("Appointments", () => {
 
     cy.contains("Save")
       .click()
-  })
+
+    cy.contains('.appointment__card--show', "Lydia Miller-Jones")
+    cy.contains('.appointment__card--show', "Sylvia Palmer")
+
+  });
 
 
-})
+});
