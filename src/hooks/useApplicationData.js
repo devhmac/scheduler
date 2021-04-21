@@ -71,7 +71,7 @@ export default function useApplicationData(props) {
     const cleanup = () => {
       webSocket.close()
     }
-    const webSocket = new WebSocket('ws://localhost:8001')
+    const webSocket = new WebSocket('wss://react-schedule-me.herokuapp.com/')
     webSocket.onopen = () => {
       webSocket.onmessage = (event) => {
 
