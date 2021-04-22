@@ -3,11 +3,11 @@
 
 # ![image](./public/favicon.ico) Interview Scheduler
 
-### Interview scheduler is a RESTful React Application allowing users to browse, book and cancel interviews in real time.
+### Interview scheduler is a Full-Stack RESTful React Application allowing users to browse, book and cancel interviews in real time.
 
 ----
 
-## Check it out here -  [Scheduler](https://hopeful-haibt-cad504.netlify.app/)
+## Check it out here -  [Scheduler](https://scheduleme.netlify.app/)
  </div>
 
 --------
@@ -40,7 +40,7 @@
 ## Utilizing
 * Jest unit testing
 * React-Testing-Library & Jest integration testing
-* StoryBook component testing
+* StoryBook React component testing
 * Cypress End to End testing
 * CircleCI deployment pipeline
 
@@ -68,6 +68,11 @@ npm test
 ```sh
 npm run storybook
 ```
+
+## Setup Database API
+[scheduler-api](https://github.com/devhmac/scheduler-api)
+  * Fork and clone API repo, and follow readme instructions
+
 # Dependencies
 - react
 - react-dom
