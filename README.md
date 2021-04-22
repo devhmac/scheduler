@@ -3,7 +3,7 @@
 
 # ![image](./public/favicon.ico) Interview Scheduler
 
-### Interview scheduler is a Full-Stack RESTful React Application allowing users to browse, book and cancel interviews in real time.
+### Interview scheduler is a Full-Stack React Application allowing users to browse, book and cancel interviews in real time.
 
 ----
 
