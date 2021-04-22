@@ -4,12 +4,15 @@
 # ![image](./public/favicon.ico) Interview Scheduler
 
 ### Interview scheduler is a Full-Stack React Application allowing users to browse, book and cancel interviews in real time.
-
 ----
 
 ## Check it out here -  [Scheduler](https://scheduleme.netlify.app/)
  </div>
 
+* Project employs the Create React App build tools
+    * Webpack
+    * Webpack Dev Server
+    * Babel
 --------
 *App hosted on netlifyDatabase API hosted on heroku*
 * *Note: heroku database api may be in sleep mode, allow it a moment to boot up* 
