@@ -6,7 +6,7 @@
 ### Interview scheduler is a Full-Stack React Application allowing users to browse, book and cancel interviews in real time.
 ----
 
-## Check it out here -  [Scheduler](https://scheduleme.netlify.app/)
+## Check it out live -  [Scheduler](https://scheduleme.netlify.app/)
  </div>
 
 * Project employs the Create React App build tools
