@@ -12,10 +12,10 @@
 *App hosted on netlifyDatabase API hosted on heroku*
 - *Note: heroku database api may be in sleep mode, allow it a moment to boot up* 
 
-Project employs the Create React App build tools
-    * Webpack
-    * Webpack Dev Server
-    * Babel
+ Project employs the Create React App build tools
+ * Webpack
+ * Webpack Dev Server
+ * Babel
 --------
 
 
