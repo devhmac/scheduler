@@ -8,8 +8,8 @@
 
 ## Check it out live -  [Scheduler](https://scheduleme.netlify.app/)
  </div>
- *App hosted on netlifyDatabase API hosted on heroku*
-  * *Note: heroku database api may be in sleep mode, allow it a moment to boot up* 
+*App hosted on netlifyDatabase API hosted on heroku*
+* *Note: heroku database api may be in sleep mode, allow it a moment to boot up* 
 
 * Project employs the Create React App build tools
     * Webpack
