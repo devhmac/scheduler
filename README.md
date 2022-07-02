@@ -21,7 +21,7 @@
 
 # Features 
 ## Live, real time updates
-* Utilizing a sleek Postgres API and Websockets, the application provides a live, real time view of currently booked appointments, and spots available. 
+* Utilizing a sleek Postgres API and Websockets, the application provides a live view of currently booked appointments, and spots available to all users on the site - in real time. 
 
 ## Seamless User Experience
 * Browse, add, edit, and cancel interviews seamlessly with dynamic React component rendering, no page loading.
